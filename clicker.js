@@ -1,16 +1,34 @@
-function clickId(id) {
-  var element = document.getElementById(id);
-	if(element !== undefined) {
-		doEvent(element, "click");
-	}
-	window.setTimeout(clickId, 1, id);
+if (ClickerCookie === undefined) var ClickerCookie = {};
+ClickerCookie.name = 'Auto Clicker for Cookies';
+ClickerCookie.version = '1.00';
+ClickerCookie.GameVersion = '2.052';
+ClickerCookie.launch = function ()
+{
+    ClickerCookie.isLoaded = 1;
+    var autoBigCookie = setInterval(function ()
+    {
+        trigger = document.createEvent('HTMLEvents');
+        trigger.initEvent("click", true, true);
+        bigCookie.dispatchEvent(trigger);
+    }, 25);
+    var autoPassCookie = setInterval(function ()
+    {
+        for (var h in Game.shimmers)
+        {
+            if (Game.shimmers[h].type == "golden" || Game.shimmers[h].type == "reindeer")
+            {
+                Game.shimmers[h].pop();
+            }
+        }
+    }, 25);
 }
 
-function doEvent(element, type) {
-    trigger = document.createEvent('HTMLEvents');
-    trigger.initEvent(type, true, true);
-    element.dispatchEvent(trigger);
+if (!ClickerCookie.isLoaded)
+{
+    ClickerCookie.launch();
+    console.log(" Mod \"Clicker Cookie\" added.");
 }
-
-window.setTimeout(clickId, 25, "bigCookie");
-window.setTimeout(clickId, 25, "goldenCookie");
+else
+{
+    console.log("Clicker Cookie Already Loaded");
+}
